@@ -142,5 +142,3 @@ src/main/java/com/seckill/
 ├── mq/                            # RocketMQ 生产者 / 消费者 / 消息体
 └── job/TransactionReconcileJob    # 定时对账
 ```
-
-详细的面试自问自答见 `docs/面试自问自答.md`。

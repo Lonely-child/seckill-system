@@ -1,0 +1,21 @@
+target/
+*.class
+*.log
+
+# JMeter 压测产物（体积大，机器生成，无需入库）
+result.jtl
+
+# 面试自问自答（个人准备材料，不上传）
+docs/
+
+# IDE
+.idea/
+*.iml
+.vscode/
+.settings/
+.classpath
+.project
+
+# OS
+.DS_Store
+Thumbs.db

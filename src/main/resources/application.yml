@@ -1,0 +1,45 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: seckill
+  datasource:
+    url: jdbc:mysql://localhost:3307/seckill?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: root123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      database: 0
+      timeout: 3000ms
+      lettuce:
+        pool:
+          max-active: 32
+          max-idle: 16
+          min-idle: 4
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    # 本地调试打开 SQL 日志，压测时务必关掉（否则拖慢吞吐）
+    # log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      id-type: auto
+
+rocketmq:
+  name-server: localhost:9876
+  producer:
+    group: seckill-producer-group
+    send-message-timeout: 3000
+  consumer:
+    group: seckill-consumer-group
+
+# 项目自定义配置
+seckill:
+  rate-limit:
+    # 每秒允许通过的请求数（令牌桶/计数限流的阈值）
+    qps: 1000

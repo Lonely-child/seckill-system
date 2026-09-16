@@ -122,7 +122,7 @@ curl -X POST "http://localhost:8080/seckill/activity/1/warmup"
 | 实际成交 | 100 单 |
 | **超卖** | **0**（订单数 == 库存数，Redis 扣到 0） |
 
-**三个关键结论（面试主动讲）：**
+**三个关键结论：**
 
 1. **0 超卖**：100 库存 → 100 订单 → Redis 剩余 0，三层防护（Lua 原子扣减 + MySQL `WHERE stock >= quantity` 乐观扣减 + 幂等）扛住了 1000 并发。
 2. **瓶颈在连接层，不在业务层**：222 个请求在 TCP 层就被拒（`Connect refused`），因为单机 Tomcat 默认 `maxThreads=200` + accept 队列（默认 100）被打满——这是「为什么还需要 Nginx 连接限流 + 水平扩容」的实测证据，也是限流的边界：**应用层限流挡不住 TCP 连接层的拒绝**。
